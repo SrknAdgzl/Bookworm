@@ -9,49 +9,64 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: []) var books: FetchedResults<Book>
-    
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.title),
+//      SortDescriptor(\.title, order: .reverse) for reverse order
+        SortDescriptor(\.author)
+    ]) var books: FetchedResults<Book>
+
     @State private var showingAddScreen = false
-    
-    
+
     var body: some View {
         NavigationView {
-            NavigationView {
-                List {
-                    ForEach(books) { book in
-                        NavigationLink {
-                            Text(book.title ?? "Unknown Title")
-                        } label: {
-                            HStack {
-                                EmojiRatingView(rating: book.rating)
-                                    .font(.largeTitle)
-                                
-                                VStack(alignment: .leading) {
-                                    Text(book.title ?? "Unknown Title")
-                                        .font(.headline)
-                                    
-                                    Text(book.author ?? "Unknown Author")
-                                        .foregroundColor(.secondary)
-                                }
+            List {
+                ForEach(books) { book in
+                    NavigationLink {
+                        DetailView(book: book)
+                    } label: {
+                        HStack {
+                            EmojiRatingView(rating: book.rating)
+                                .font(.largeTitle)
+
+                            VStack(alignment: .leading) {
+                                Text(book.title ?? "Unknown Title")
+                                    .font(.headline)
+
+                                Text(book.author ?? "Unknown Author")
+                                    .foregroundColor(.secondary)
                             }
                         }
                     }
                 }
+                .onDelete(perform: deleteBooks)
             }
-                .navigationTitle("Bookworm")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            showingAddScreen.toggle()
-                        } label: {
-                            Label("Add book", systemImage: "plus")
-                        }
+            .navigationTitle("Bookworm")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showingAddScreen.toggle()
+                    } label: {
+                        Label("Add Book", systemImage: "plus")
                     }
                 }
-                .sheet(isPresented: $showingAddScreen) {
-                    AddBookView()
-                }
+            }
+            .sheet(isPresented: $showingAddScreen) {
+                AddBookView()
+            }
         }
+    }
+
+    func deleteBooks(at offsets: IndexSet) {
+        for offset in offsets {
+            let book = books[offset]
+            moc.delete(book)
+        }
+
+        try? moc.save()
     }
 }
 
