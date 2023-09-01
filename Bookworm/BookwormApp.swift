@@ -14,7 +14,7 @@ struct BookwormApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(\.managedObjectContext, dataCotroller.container.viewContext)
+                .environment(\.managedObjectContext, dataCotroller.container.viewContext)
         }
     }
 }
