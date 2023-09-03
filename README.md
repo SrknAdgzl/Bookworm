@@ -1,7 +1,7 @@
 # Bookworm
 
 ### Screen Shots
-<img src="https://github.com/SrknAdgzl/Bookworm/blob/main/SS/Mockup.png" width="1920" height="1080">
+<img src="https://github.com/SrknAdgzl/Bookworm/blob/main/SS/Mockup.png" width="1300" height="600">
 
 ---
 
