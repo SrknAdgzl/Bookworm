@@ -40,6 +40,6 @@
 
 ## Author Info
 
-- Twitter - [@SrknAdgzl](https://twitter.com/srknadgzlDidLoad)
+- Twitter - [@SrknAdgzl](https://twitter.com/SrknAdgzl)
 
 [Back To The Top](#Bookworm)
