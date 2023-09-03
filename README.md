@@ -40,7 +40,6 @@
 
 ## Author Info
 
-- Twitter - [@alexDidLoad](https://twitter.com/alexDidLoad)
-- Website - [LinkedIn: Alexander Ha](https://linkedin.com/in/alexhha)
+- Twitter - [@SrknAdgzl](https://twitter.com/srknadgzlDidLoad)
 
 [Back To The Top](#Bookworm)
